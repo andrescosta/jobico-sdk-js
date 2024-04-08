@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: schema-js1
+data:
+  schema-js1.json: |
+    {
+      "type": "object",
+      "properties": {
+          "firstName": {
+              "type": "string"
+          },
+          "lastName": {
+              "type": "string"
+          },
+          "age": {
+              "type": "integer"
+          }
+      },
+      "required": ["firstName", "lastName"]
+    }
+  
+---
+apiVersion: jobico.coeux.dev/v1
+kind: Job
+metadata:
+  name: job-for-js1
+spec:
+  events:
+    - name: js 
+      script: test.js
+      schema:
+        key: schema-js1
